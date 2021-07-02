@@ -1,0 +1,47 @@
+name: Node CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install npm@7
+        run: npm i -g npm@7
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm audit --production
+          npm test
+
+  release:
+    name: 💍 Semantic Release
+
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: set git user
+        run: |
+          git config --global user.name test
+          git config --global user.email "test@users.noreply.github.com"
+      - name: Release
+        run: |
+          ls -lahH
+          npm run release
+          git status
