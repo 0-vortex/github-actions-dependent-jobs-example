@@ -28,20 +28,10 @@ jobs:
           npm audit --production
           npm test
 
-  release:
-    name: 💍 Semantic Release
-
-    needs: [ build ]
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-
-    steps:
-      - name: set git user
+      - name: Release
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           git config --global user.name test
           git config --global user.email "test@users.noreply.github.com"
-      - name: Release
-        run: |
-          ls -lahH
           npm run release
           git status

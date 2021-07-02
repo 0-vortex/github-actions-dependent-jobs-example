@@ -2,6 +2,8 @@
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+TL;DR: It's not a new job if you need the same build context.
+
 ## Requirements
 
 In order to run the project from a container we need `node>=16` and `npm>=7` installed on our development machines.
