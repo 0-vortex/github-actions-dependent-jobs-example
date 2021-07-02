@@ -31,7 +31,7 @@ jobs:
       - name: Release
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          git config --global user.name test
+          git config --global user.name test2
           git config --global user.email "test@users.noreply.github.com"
           npm run release
           git status
